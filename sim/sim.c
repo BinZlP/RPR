@@ -329,6 +329,9 @@ int main(int argc, char **argv)
 	init_policy(policy, memsz);
 	simulate(policy, tracefile);
 	post_sim(policy);
+
+	for(int i=0; i<argc; i++) printf("%s ", argv[i]);
+	printf("\n");
 	report(policy);
 	fini_policy(policy);
 

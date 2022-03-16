@@ -4,6 +4,11 @@
 #include "alifo.h"
 #include "../lib/refault.h"
 
+#define EXTRACT_WEIGHT
+#ifdef EXTRACT_WEIGHT
+FILE *fp;
+#endif
+
 void init_aLIFO(policy_t *self, unsigned long memsz);
 void fini_aLIFO(policy_t *self);
 int malloc_aLIFO(policy_t *self, unsigned long addr, unsigned long size);
@@ -499,7 +504,10 @@ score(pol_t *pol, unsigned long stime, int winner)
 		pol->lifo_weight = 0.01;
 		pol->clock_weight = 0.99;
 	}
-		
+
+#ifdef EXTRACT_WEIGHT
+	fwrite(&(pol->clock_weight), sizeof(long double), 1, fp);
+#endif
 
 	if (debug) {
 		printf("[CHAL] winner: ");
@@ -927,6 +935,10 @@ void init_aLIFO(policy_t *self, unsigned long memsz)
 	// RL init
 	learning_rate = 0.30;
 	discount_rate = spow(0.005, 1/memsz);
+
+#ifdef EXTRACT_WEIGHT
+	fp = fopen("weight.log", "wb");
+#endif
 }
 
 void fini_aLIFO(policy_t *self)
@@ -993,6 +1005,11 @@ skip_refault:
 	}
 
 skip:
+
+#ifdef EXTRACT_WEIGHT
+	fclose(fp);
+#endif
+
 	return;
 }
 int malloc_aLIFO(policy_t *self, unsigned long addr, unsigned long size)
@@ -1172,6 +1189,7 @@ pol_victim_lifo(pol_t *pol)
 static inline void
 get_lifo_score(pol_t* pol)
 {
+#ifdef ENABLE_EXPLORATION
 	double long num;
 	srand(time(0));
 	num = rand() / (double long)RAND_MAX;
@@ -1184,6 +1202,7 @@ get_lifo_score(pol_t* pol)
 	else if (pol->clock_weight < pol->lifo_weight && pol->lifo_weight < num)
 		// lifo
 		pol->lifo = true;
+#endif
 }
 
 static inline void
