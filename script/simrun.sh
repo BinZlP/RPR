@@ -6,10 +6,22 @@
 
 TARGET="$1"
 POLICY="$2"
-SIMDIR="/home/dcslab/git_rpr/rpr/sim/sim"
+SIMDIR="/home/dcslab/APR/pose-tools-master/sim/sim"
 INPUTDIR="/home/dcslab/APR/pose-tools-master/script"
-SIZE_cholesky=("4000" "6250" "8500" "10750" "13000" "15250" "17500" "19750" "22000" "24250" "26500" "28750" "31000" "33250" "35500" "37750" "40000" )
 
+LOGDIR="/home/dcslab/rpr_log"
+
+if [ -n "$2" ]
+then
+        POLICY="$2"
+        NAME="$2"
+else
+        POLICY=("opt" "clock" "clock-pro" "seq" "alifo")
+        NAME="ALL"
+fi
+
+
+SIZE_cholesky=("4000" "6250" "8500" "10750" "13000" "15250" "17500" "19750" "22000" "24250" "26500" "28750" "31000" "33250" "35500" "37750" "40000" )
 SIZE_fft=("4200" "6250" "8500" "10750" "13000" "15250" "17500" "19750" "22000" "24250" "26500" "28750" "31000" "33250" "35500" "37750" "40000" )
 SIZE_lu_cb=("300" "400" "500" "600" "700" "800" "900" "1000" "1100" "1200" "1300" "1400" "1500" "1600" "1700" "1800" "1900" )
 SIZE_lu_ncb=("17000" "18125" "19250" "20375" "21500" "22625" "23750" "24875" "26000" "27125" "28250" "29375" "30500" "31625" "32750" "33875" "35000" )
@@ -63,7 +75,7 @@ echo "$DATE"
 echo "$POLICY[*]"
 echo "$NAME"
 
-LOG=$INPUTDIR/$TARGET.$NAME.$DATE.log
+LOG=$LOGDIR/$TARGET.$NAME.$DATE.log
 touch $LOG
 for pol_item in ${POLICY[*]}
 do

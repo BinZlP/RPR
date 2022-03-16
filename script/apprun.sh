@@ -54,11 +54,11 @@ case "${TARGET}" in
 		PROG="${PARSECDIR}/ext/splash2x/apps/${TARGET}/inst/${PARSECPLAT}/bin/${TARGET}"
 		;;
 	"water_nsquared" )
-		PROGARGS="< ${PARSECDIR}/ext/splash2x/apps/${TARGET}/inst/${PARSECPLAT}/bin/input_1"
+		PROGARGS="< ${PARSECDIR}/ext/splash2x/apps/${TARGET}/run/input_1"
 		PROG="${PARSECDIR}/ext/splash2x/apps/${TARGET}/inst/${PARSECPLAT}/bin/${TARGET}"
 		;;
 	"water_spatial" )
-		PROGARGS="< ${PARSECDIR}/ext/splash2x/apps/${TARGET}/inst/${PARSECPLAT}/bin/input_1"
+		PROGARGS="< ${PARSECDIR}/ext/splash2x/apps/${TARGET}/run/input_1"
 		PROG="${PARSECDIR}/ext/splash2x/apps/${TARGET}/inst/${PARSECPLAT}/bin/${TARGET}"
 		;;
 	*)

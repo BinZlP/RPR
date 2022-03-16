@@ -3,7 +3,7 @@
 APP="./apprun.sh"
 SIM="./simrun.sh"
 LOG="app.log"
-LIST=("cholesky" "fft" "lu_cb" "lu_ncb" "ocean_cp" "ocean_ncp" "radiosity" "raidx" "raytrace" "volrend" "water_nsquared" "water_spatial" )
+LIST=("cholesky" "fft" "lu_cb" "lu_ncb" "ocean_cp" "ocean_ncp" "radiosity" "radix" "raytrace" "volrend" "water_nsquared" "water_spatial" )
 
 echo "LOG START" > $LOG
 
